@@ -3,17 +3,13 @@
 ![](https://img.shields.io/badge/Forge-14.23.5.2847-brightgreen.svg?colorB=469C00)
 ![](https://img.shields.io/badge/Spigot-1.12.2%20latest-brightgreen.svg?colorB=469C00)
 
-[Download](https://github.com/Luohuayu/CatServer/releases)
-[bStats](https://bstats.org/plugin/bukkit/CatServer)
-[Website](http://catserver.moe)
+自用多线程修改合并版（简称自用）
 
-开源免费的高版本Forge+Bukkit+Spigot服务端<br>
-分支1.12.2为稳定版,1.12.2-async为多线程版<br>
-稳定版(universal): 兼容性和稳定性较好,服务器单核性能高推荐使用<br>
-多线程版(async): 能利用多核运行提高TPS,但可能存在兼容稳定问题<br><br>
+[原版下载](https://github.com/Luohuayu/CatServer/releases)  
+[原版统计](https://bstats.org/plugin/bukkit/CatServer)  
+[原版官网](http://catserver.moe)  
 
-QQ群: [675080](https://jq.qq.com/?_wv=1027&k=541nx1s)<br>
-Telegram: [@CatServer](https://t.me/CatServer)<br>
-Discord: [Click to join](https://discord.gg/wvBJN4d)<br><br>
 
-<img src="https://bstats.org/signatures/bukkit/CatServer.svg">
+[原版QQ群675080](https://jq.qq.com/?_wv=1027&k=541nx1s)<br>
+[原版Telegram @CatServer](https://t.me/CatServer)<br>
+[原版Discord](https://discord.gg/wvBJN4d)<br>
