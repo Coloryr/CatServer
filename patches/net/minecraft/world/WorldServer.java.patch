@@ -508,15 +508,20 @@
      }
  
      protected void tickPlayers()
-@@ -668,6 +830,7 @@
+@@ -668,15 +830,24 @@
          {
              int i = this.pendingTickListEntriesTreeSet.size();
  
+-            if (i != this.pendingTickListEntriesHashSet.size())
+-            {
+-                throw new IllegalStateException("TickNextTick list out of synch");
 +            // TODO: Check if this condition should be always false(HashTreeSet from CB related)
-             if (i != this.pendingTickListEntriesHashSet.size())
-             {
-                 throw new IllegalStateException("TickNextTick list out of synch");
-@@ -676,7 +839,14 @@
++            if (i != this.pendingTickListEntriesHashSet.size()) {
++                getServer().getLogger().info("i=" + this.pendingTickListEntriesTreeSet.size() + ",j=" + this.pendingTickListEntriesHashSet.size());
++                return false;
++//                throw new IllegalStateException("TickNextTick list out of synch");
+             }
+             else
              {
                  if (i > 65536)
                  {
@@ -532,7 +537,7 @@
                  }
  
                  this.profiler.startSection("cleaning");
-@@ -703,6 +873,9 @@
+@@ -703,6 +874,9 @@
                  {
                      NextTickListEntry nextticklistentry1 = iterator.next();
                      iterator.remove();
@@ -542,7 +547,7 @@
                      int k = 0;
  
                      if (this.isAreaLoaded(nextticklistentry1.position.add(0, 0, 0), nextticklistentry1.position.add(0, 0, 0)))
-@@ -796,6 +969,7 @@
+@@ -796,6 +970,7 @@
          return list;
      }
  
@@ -550,7 +555,7 @@
      public void updateEntityWithOptionalForce(Entity entityIn, boolean forceUpdate)
      {
          if (!this.canSpawnAnimals() && (entityIn instanceof EntityAnimal || entityIn instanceof EntityWaterMob))
-@@ -810,6 +984,7 @@
+@@ -810,6 +985,7 @@
  
          super.updateEntityWithOptionalForce(entityIn, forceUpdate);
      }
@@ -558,7 +563,7 @@
  
      private boolean canSpawnNPCs()
      {
-@@ -824,11 +999,68 @@
+@@ -824,11 +1000,68 @@
      protected IChunkProvider createChunkProvider()
      {
          IChunkLoader ichunkloader = this.saveHandler.getChunkLoader(this.provider);
@@ -628,7 +633,7 @@
          return !this.mcServer.isBlockProtected(this, pos, player) && this.getWorldBorder().contains(pos);
      }
  
-@@ -894,6 +1126,7 @@
+@@ -894,6 +1127,7 @@
          }
          else
          {
@@ -636,7 +641,7 @@
              this.findingSpawnPoint = true;
              BiomeProvider biomeprovider = this.provider.getBiomeProvider();
              List<Biome> list = biomeprovider.getBiomesToSpawnIn();
-@@ -903,6 +1136,23 @@
+@@ -903,6 +1137,23 @@
              int j = this.provider.getAverageGroundLevel();
              int k = 8;
  
@@ -660,7 +665,7 @@
              if (blockpos != null)
              {
                  i = blockpos.getX();
-@@ -915,7 +1165,7 @@
+@@ -915,7 +1166,7 @@
  
              int l = 0;
  
@@ -669,7 +674,7 @@
              {
                  i += random.nextInt(64) - random.nextInt(64);
                  k += random.nextInt(64) - random.nextInt(64);
-@@ -966,6 +1216,7 @@
+@@ -966,6 +1217,7 @@
  
          if (chunkproviderserver.canSave())
          {
@@ -677,7 +682,7 @@
              if (progressCallback != null)
              {
                  progressCallback.displaySavingString("Saving level");
-@@ -979,14 +1230,17 @@
+@@ -979,14 +1231,17 @@
              }
  
              chunkproviderserver.saveChunks(all);
@@ -696,7 +701,7 @@
          }
      }
  
-@@ -1012,6 +1266,12 @@
+@@ -1012,6 +1267,12 @@
              }
          }
  
@@ -709,7 +714,7 @@
          this.worldInfo.setBorderSize(this.getWorldBorder().getDiameter());
          this.worldInfo.getBorderCenterX(this.getWorldBorder().getCenterX());
          this.worldInfo.getBorderCenterZ(this.getWorldBorder().getCenterZ());
-@@ -1023,18 +1283,20 @@
+@@ -1023,18 +1284,20 @@
          this.worldInfo.setBorderLerpTime(this.getWorldBorder().getTimeUntilTarget());
          this.saveHandler.saveWorldInfoWithPlayer(this.worldInfo, this.mcServer.getPlayerList().getHostPlayerData());
          this.mapStorage.saveAllData();
@@ -734,7 +739,7 @@
              {
                  this.loadedEntityList.add(entity);
                  this.onEntityAdded(entity);
-@@ -1046,7 +1308,7 @@
+@@ -1046,7 +1309,7 @@
      {
          if (entityIn.isDead)
          {
@@ -743,7 +748,7 @@
              return false;
          }
          else
-@@ -1065,7 +1327,7 @@
+@@ -1065,7 +1328,7 @@
                  {
                      if (!(entityIn instanceof EntityPlayer))
                      {
@@ -752,7 +757,7 @@
                          return false;
                      }
  
-@@ -1113,9 +1375,15 @@
+@@ -1113,9 +1376,15 @@
  
      public boolean addWeatherEffect(Entity entityIn)
      {
@@ -769,7 +774,7 @@
              return true;
          }
          else
-@@ -1136,10 +1404,18 @@
+@@ -1136,10 +1405,18 @@
  
      public Explosion newExplosion(@Nullable Entity entityIn, double x, double y, double z, float strength, boolean isFlaming, boolean isSmoking)
      {
@@ -789,7 +794,7 @@
          if (!isSmoking)
          {
              explosion.clearAffectedBlockPositions();
-@@ -1182,7 +1458,8 @@
+@@ -1182,7 +1459,8 @@
              {
                  if (this.fireBlockEvent(blockeventdata))
                  {
@@ -799,7 +804,7 @@
                  }
              }
  
-@@ -1208,27 +1485,31 @@
+@@ -1208,27 +1486,31 @@
  
          if (this.prevRainingStrength != this.rainingStrength)
          {
@@ -837,7 +842,7 @@
          }
      }
  
-@@ -1265,11 +1546,18 @@
+@@ -1265,11 +1547,18 @@
  
      public void spawnParticle(EnumParticleTypes particleType, boolean longDistance, double xCoord, double yCoord, double zCoord, int numberOfParticles, double xOffset, double yOffset, double zOffset, double particleSpeed, int... particleArguments)
      {
@@ -856,7 +861,7 @@
              this.sendPacketWithinDistance(entityplayermp, longDistance, xCoord, yCoord, zCoord, spacketparticles);
          }
      }
-@@ -1323,6 +1611,11 @@
+@@ -1323,6 +1612,11 @@
          return this.functionManager;
      }
  

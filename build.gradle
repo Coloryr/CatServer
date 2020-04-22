@@ -1,3 +1,5 @@
+import org.gradle.api.file.FileTree
+
 buildscript {
     repositories {
         mavenLocal()
@@ -149,6 +151,8 @@ dependencies {
     compile 'org.scala-lang:scala-reflect:2.11.1'
     compile 'org.scala-lang:scala-swing_2.11:1.0.1'
     compile 'org.scala-lang:scala-xml_2.11:1.0.2'
+
+    runtimeOnly fileTree(dir:'lib',include:['*.jar'])
 }
 
 outputJar {
